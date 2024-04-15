@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class=" py-5 bg-light">
+	<div class="container px-5">
+
+
+
+
+		<h2>@Model.Title</h2>
+		<p class="card-text">@Model.LongDescription</p>
+		<p class="card-text">Wage: @Model.Wage</p>
+		<h3>Requirements:</h3>
+		<p class="card-text">@Model.Requirements</p>
+
+		<h3>Recruiter contact:</h3>
+		<p class="card-text">
+			<a asp-controller="User" asp-action="Detail" asp-route-id="@Model.Employer.Id">
+				<span>@Model.Employer.Name</span>
+			</a>
+			
+			<span class="mx-2 text-muted">|</span> <!-- Розділювач між ім'ям та поштою -->
+			<span>@Model.Employer.Email</span>
+		</p>
+		<p>Country: @Model.Country</p>
+		<p>City: @Model.City</p>
+		<p>Type: @Model.Type</p>
+		<p>Post Date: @Model.PostDate.ToString("MM/dd/yyyy")</p>
+
+
+
+
+
+	
+
+
+
+
+
+	</div>
+</div>

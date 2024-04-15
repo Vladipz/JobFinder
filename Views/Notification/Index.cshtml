@@ -1,0 +1,47 @@
+﻿@using JobFinder.ViewModels
+@model List<Notification>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+
+
+           @*  <th scope="col">Email</th>
+            <th scope="col">Id</th> *@
+
+            @* <th scope="col" class="text-center">Actions</th> *@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var notification in Model.Select((value, i) => (value, i)))
+        {
+
+            <tr>
+                <th scope="row">@(notification.i + 1)</th>
+                <td>
+                    <a asp-controller="Vacancy" asp-action="Detail" asp-route-id="@notification.value.VacancyId">
+                        @notification.value.Title
+                    </a>
+                </td>
+                <td>@notification.value.Description</td>
+
+                
+
+                @* <td class="d-flex justify-content-center">
+                    <div class="btn-group btn-group btn-group-sm" role="group" aria-label="Basic example">
+
+                        <a type="button" class="btn btn-secondary btn btn-info"
+                           asp-controller="User" asp-action="Detail" asp-route-id="@user.value.Id">Info</a>
+                        <a type="button" class="btn btn-secondary btn btn-primary">Edit</a>
+                        <a type="button" class="btn btn-secondary btn btn-danger">Delete</a>
+                    </div>
+                </td> *@
+            </tr>
+
+
+        }
+    </tbody>
+</table>

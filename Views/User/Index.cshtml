@@ -1,0 +1,41 @@
+﻿@using JobFinder.ViewModels
+@model List<UserViewModel>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Id</th>
+
+            <th scope="col" class="text-center">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model.Select((value, i) => ( value, i )))
+    {
+        
+            <tr>
+                <th scope="row">@(user.i+1)</th>
+                <td>@user.value.Name</td>
+                <td>@user.value.Surname</td>
+                <td>@user.value.Email</td>
+                <td>@user.value.Id</td>
+
+                <td class="d-flex justify-content-center">
+                    <div class="btn-group btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        
+                        <a type="button" class="btn btn-secondary btn btn-info" 
+                        asp-controller="User" asp-action="Detail" asp-route-id="@user.value.Id">Info</a>
+                        <a type="button" class="btn btn-secondary btn btn-primary">Edit</a>
+                        <a type="button" class="btn btn-secondary btn btn-danger">Delete</a>
+                    </div>
+                </td>
+            </tr>
+
+        
+    }
+    </tbody>
+    </table>

@@ -1,0 +1,100 @@
+﻿﻿@using Microsoft.AspNetCore.Identity
+@using JobFinder.Helpers
+@* @inject SignInManager<AppUser> SignInManager
+ *@
+@model JobFinder.ViewModels.DashboardViewModel
+
+@if (User.Identity.IsAuthenticated && User.IsInRole("employer"))
+{
+	<h4 class=" fw-normal">Employer Dashboard</h4>
+	<a type="button" class="btn btn-primary" asp-area="" asp-controller="Vacancy" asp-action="Create">Create vacancy</a>
+	<div class="album py-5 bg-light">
+		<div class="container">
+			<h4 class=" fw-normal"> Your vacancies</h4>
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+				@foreach (var vacancy in Model.Vacancies)
+				{
+					<div class="col-md-4">
+						<div class="card mb-4 box-shadow">
+
+							<div class="card-body">
+								<h2>@vacancy.Title</h2>
+								<p class="card-text">@vacancy.ShortDescription</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+										<a type="btn btn-success" asp-controller="Vacancy" asp-action="Detail" asp-route-id="@vacancy.Id"
+										   class="btn btn-sm btn-outline-secondary">View</a>
+										@if (User.Identity.IsAuthenticated)
+										{
+											<a asp-controller="Vacancy" asp-action="Edit" asp-route-id="@vacancy.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+											<a asp-controller="Vacancy" asp-action="Delete" asp-route-id="@vacancy.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+										}
+
+
+									</div>
+									<small class="text-muted">Wage: @vacancy.Wage</small>
+									<small style="color: @HelpersFoo.GetStatusClass(@vacancy.VacancyStatus.ToString());">Status: @vacancy.VacancyStatus</small>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				}
+			</div>
+
+
+		</div>
+	</div>
+}
+else if (User.Identity.IsAuthenticated && (User.IsInRole("searcher") || User.IsInRole("admin")))
+{
+	<h4 class=" fw-normal">Searcher Dashboard</h4>
+	<a type="button" class="btn btn-primary" asp-area="" asp-controller="Resume" asp-action="Create">Create resume</a>
+	<div class="album py-5 bg-light">
+		<div class="container">
+			<h4 class=" fw-normal"> Your resumes</h4>
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Title</th>
+							<th scope="col">Status</th>
+							<th scope="col">Contact info</th>
+							<th scope="col" class="text-center">Actions</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var resume in Model.Resumes.Select((value, i) => (value, i)))
+				{
+					
+							<tr>
+								<th scope="row">@(resume.i+1)</th>
+								<td>@resume.value.Title</td>
+								<td>@resume.value.ResumeStatus</td>
+								<td>@resume.value.ContactInfo</td>
+
+								<td class="d-flex justify-content-center">
+									<div class="btn-group btn-group btn-group-sm" role="group" aria-label="Basic example">
+
+										<a type="button" class="btn btn-secondary btn btn-info"
+										   asp-controller="Resume" asp-action="Detail" asp-route-id="@resume.value.Id">Info</a>
+										<a type="button" class="btn btn-secondary btn btn-primary"
+										asp-controller="Resume" asp-action="Edit" asp-route-id="@resume.value.Id">Edit</a>
+										<a type="button" class="btn btn-secondary btn btn-danger"
+										   asp-controller="Resume" asp-action="Delete" asp-route-id="@resume.value.Id">Delete</a>
+									</div>
+								</td>
+							</tr>
+					
+				}
+					</tbody>
+				</table>
+			</div>
+
+
+		</div>
+	</div>
+}

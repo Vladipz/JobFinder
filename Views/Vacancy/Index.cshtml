@@ -1,0 +1,50 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+
+
+@model IEnumerable<Vacancy>
+
+<div class="album py-5 bg-light">
+	
+		<form asp-controller="Vacancy" asp-action="Index">
+			<span class="btn-group">
+				<input class="form-control" type="text" name="SearchedText" placeholder="Search Key">
+				<input class="p-1 ml-2 btn btn-sm btn-info" type="submit" value="Search" />
+			</span>
+		</form>
+	
+			<p> </p>
+		<div class="row">
+			@foreach (var vacancy in Model)
+			{
+				<div class="col-md-4">
+					<div class="card mb-4 box-shadow">
+					
+						<div class="card-body">
+							<h2>@vacancy.Title</h2>
+							<p class="card-text">@vacancy.ShortDescription</p>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+									<a type="btn btn-success" asp-controller="Vacancy" asp-action="Detail" asp-route-id="@vacancy.Id"
+									   class="btn btn-sm btn-outline-secondary">View</a>
+									@if (User.Identity.IsAuthenticated && User.IsInRole("admin"))	
+									{
+										<a type="btn btn-success" asp-controller="Vacancy" asp-action="Edit" asp-route-id="@vacancy.Id" class="btn btn-sm btn-outline-secondary">Edit</a>
+										<a type="btn btn-success" asp-controller="Vacancy" asp-action="Delete" asp-route-id="@vacancy.Id" class="btn btn-sm btn-outline-secondary">Delete</a>
+
+									}
+									
+
+								</div>
+								<small class="text-muted">Зарплата: @vacancy.Wage</small>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+
+		</div>
+	</div>
+</div>

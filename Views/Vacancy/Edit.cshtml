@@ -1,0 +1,73 @@
+﻿@using JobFinder.Data.Enum;
+@using JobFinder.ViewModels;
+@model EditVacancyViewModel;
+
+
+
+<form method="post" asp-action="Edit" >
+	<input asp-for="EmployerId" type="hidden" id="EmployerId" />
+	
+	<div class="form-group">
+		<label asp-for="Title">Назва вакансії</label>
+		<input asp-for="Title" class="form-control" placeholder="Введіть назву вакансії">
+		<span asp-validation-for="Title" class="text-danger"></span>
+
+	</div>
+	<div class="form-group">
+		<label asp-for="ShortDescription">Короткий опис</label>
+		<input asp-for="ShortDescription" class="form-control" placeholder="Введіть короткий опис вакансії">
+		<span asp-validation-for="ShortDescription" class="text-danger"></span>
+
+	</div>
+	<div class="form-group">
+		<label asp-for="LongDescription">Повний опис</label>
+		<textarea asp-for="LongDescription" class="form-control" rows="3"></textarea>
+		<span asp-validation-for="LongDescription" class="text-danger"></span>
+
+	</div>
+	<div class="form-group">
+		<label asp-for="Requirements">Вимоги</label>
+		<textarea asp-for="Requirements" class="form-control" rows="3"></textarea>
+		<span asp-validation-for="Requirements" class="text-danger"></span>
+
+	</div>
+	<div class="form-group">
+		<label asp-for="Wage">Заробітня плата</label>
+		<input asp-for="Wage" class="form-control" placeholder="Введіть заробітню плату">
+		<span asp-validation-for="Wage" class="text-danger"></span>
+
+	</div>
+	<div class="form-group">
+		<label asp-for="Country">Країна</label>
+		<input asp-for="Country" class="form-control" placeholder="Введіть країну">
+		<span asp-validation-for="Country" class="text-danger"></span>
+
+	</div>
+	<div class="form-group">
+		<label asp-for="City">Місто</label>
+		<input asp-for="City" class="form-control" placeholder="Введіть місто">
+		<span asp-validation-for="City" class="text-danger"></span>
+	</div>
+	<div class="form-group">
+		<label asp-for="Type">Тип роботи</label>
+		<select asp-for="Type" asp-items="@Html.GetEnumSelectList<JobType>()" class="form-control">
+			<option selected="selected" value="">Тип обраний</option>
+		</select>
+		<span asp-validation-for="Type"я class="text-danger"></span>
+	</div>
+	@if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+	{
+		<div class="form-group">
+			<label asp-for="VacancyStatus">Тип роботи</label>
+			<select asp-for="VacancyStatus" asp-items="@Html.GetEnumSelectList<Status>()" class="form-control">
+				<option selected="selected" value="">Тип обраний</option>
+			</select>
+			<span asp-validation-for="VacancyStatus" я class="text-danger"></span>
+		</div>
+
+	}
+   
+    
+   
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,0 +1,40 @@
+﻿@model Resume
+
+<div class=" py-5 bg-light">
+	<div class="container px-5">
+
+
+
+
+		<h2>@Model.Title</h2>
+		<h3>Experience</h3>
+		<p class="card-text">@Model.Experience</p>
+		<h3>Skills</h3>
+		<p class="card-text">@Model.Skills</p>
+		<h3>Education</h3>
+
+		<p class="card-text">@Model.Education</p>
+
+		<h3>Searcher contact:</h3>
+		<p class="card-text">
+			<span>@Model.Searcher.Name</span>
+			<span class="mx-2 text-muted">|</span> <!-- Розділювач між ім'ям та поштою -->
+			<span>@Model.Searcher.Surname</span>
+			<span class="mx-2 text-muted">|</span> <!-- Розділювач між ім'ям та поштою -->
+			<span>@Model.ContactInfo</span>
+		</p>
+		
+@* 		<p>Post Date: @Model.PostDate.ToString("MM/dd/yyyy")</p>
+ *@
+
+
+
+
+
+
+
+
+
+
+	</div>
+</div>

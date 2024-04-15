@@ -1,0 +1,46 @@
+﻿@model Resume
+@using JobFinder.Data.Enum
+<h1>Are you sure you want to delete this resume?</h1>
+
+<form method="post" asp-action="Delete">
+	<input asp-for="SearcherId" type="hidden" id="SearcherId" />
+	<div class="form-group">
+		<label asp-for="Title">resume title</label>
+		<input asp-for="Title" class="form-control" placeholder="Enter resume title">
+		<span asp-validation-for="Title" class="text-danger"></span>
+
+	</div>
+
+	<div class="form-group">
+		<label asp-for="Skills">Skills</label>
+		<textarea asp-for="Skills" class="form-control" rows="3"></textarea>
+		<span asp-validation-for="Skills" class="text-danger"></span>
+
+	</div>
+	<div class="form-group">
+		<label asp-for="Experience">Experience</label>
+		<textarea asp-for="Experience" class="form-control" rows="3"></textarea>
+		<span asp-validation-for="Experience" class="text-danger"></span>
+
+	</div>
+	<div class="form-group">
+		<label asp-for="Education">Education</label>
+		<textarea asp-for="Education" class="form-control" rows="3"></textarea>
+		<span asp-validation-for="Education" class="text-danger"></span>
+
+	</div>
+
+
+	<div class="form-group">
+		<label asp-for="ContactInfo">Contact info</label>
+		<input asp-for="ContactInfo" class="form-control" placeholder="Enter your contact information">
+		<span asp-validation-for="ContactInfo" class="text-danger"></span>
+	</div>
+
+</form>
+<div class="form-group">
+    <form action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger float-right mt-3" />
+    </form>
+</div>
